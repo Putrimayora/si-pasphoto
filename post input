@@ -1,0 +1,93 @@
+  <link rel="stylesheet" href="assets/css/style.css">
+
+		<div class="utama">
+    	<div class="kepala">
+			<?php include "header.php" ?>
+		</div>
+    <!--ini untuk menu-->
+		<div class="menu-malasngoding">
+			<?php include "menu.php" ?>
+		</div>
+  
+<?php 
+
+include "koneksi.php";
+
+$sql3 = "SELECT * FROM tb_post";
+$stmt3 = $koneksi->prepare($sql3);
+$stmt3->execute();
+
+
+if(isset($_POST['t_simpan']))
+{
+	
+
+$sql = "INSERT INTO album VALUES ('', :category_id, :slug, :title, :cat_id)";
+
+ $stmt = $koneksi->prepare($sql);
+ $stmt ->bindParam(":post_id", $_POST['post_id']);
+ $stmt ->bindParam(":category_id", $_POST['category_id']);
+ $stmt ->bindParam(":date", $_POST['date']);
+ $stmt ->bindParam(":slug", $_POST['slug']);
+ $stmt ->bindParam(":title", $_POST['title']);
+ $stmt ->bindParam(":text", $_POST['text']);
+ $stmt ->bindParam(":cat_id", $_POST['cat_id']);
+ $stmt-> execute();
+
+}
+
+?>
+<div class="isi">
+<form action="" method="POST">
+	<table>
+        
+        <table>
+         <tr>
+            <td>ID POST </td>
+            <td><input type="text" name="post_id"></td>   
+            
+        </tr>
+        <tr>
+            <td>ID CATEGORY </td>
+            <td><input type="text" name="category_id"></td>   
+            
+        </tr>
+
+        <tr>
+            <td>DATE </td>
+            <td><input type="date" name="date"></td>   
+            
+        </tr>
+        <tr>
+            <td>SLUG </td>
+            <td><input type="text" name="slug"></td>   
+            
+        </tr>
+        <tr>
+            <td>TITLE </td>
+            <td><input type="text" name="title"></td>   
+            
+        </tr>
+
+        <tr>
+            <td>TEXT </td>
+            <td><input type="text" name="text"></td>
+            
+        </tr>
+        <tr>
+            <td>ID CAT </td>
+            <td><input type="text" name="cat_id"></td>   
+            
+        </tr>
+        
+        
+        <tr>
+            <td></td>
+            <td><input type="submit" name="t_simpan" value="submit"></td>
+        </tr>
+    </table>
+</form>
+</div>
+<div class="footer">
+			<?php include "footer.php" ?>
+		</div>
