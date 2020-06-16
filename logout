@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="assets/css/style.css">
+
+		<div class="utama">
+    	<div class="kepala">
+			<?php include "header.php" ?>
+		</div>
+    <!--ini untuk menu-->
+		<div class="menu-malasngoding">
+			<?php include "menu.php" ?>
+		</div>
+<?php
+session_start();
+session_destroy();
+
+header("location: login.php");
+?>
