@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="assets/css/style.css">
+
+        <div class="utama">
+        <div class="kepala">
+            <?php include "header.php" ?>
+        </div>
+    <!--ini untuk menu-->
+        <div class="menu-malasngoding">
+            <?php include "menu.php" ?>
+        </div>
+<?php 
+include "koneksi.php";
+
+$id = $_GET['id'];
+
+$sql = "SELECT * FROM tb_category WHERE category_id= :category_id";
+
+$stmt = $koneksi->prepare($sql);
+$stmt->bindParam(":category_id", $id);
+$stmt->execute();
+
+    $result = $stmt->fetch();
+    if (isset($_POST['t_simpan'])) {
+        $sql2 = "UPDATE  SET nama = :nama WHERE category_id= :category_id";
+
+
+$stmt2 = $koneksi->prepare($sql2);
+ $stmt2 ->bindParam(":nama", $_POST['nama']);;
+ $stmt2 ->bindParam(":text", $_POST['text']);;
+ $stmt2->bindParam(":category_id", $id);
+ $stmt2-> execute();
+
+    header("location: category_tampil.php");
+    }
+
+    ?>
+    <form action="" method="POST">
+    <table>
+        
+        <table>
+        
+        <tr>
+            <td>ID </td>
+            <td><input type="text" name="category_id"></td>   
+            
+        </tr>
+
+        <tr>
+            <td>NAMA </td>
+            <td><input type="text" name="nama"></td>   
+            
+        </tr>
+
+        <tr>
+            <td>TEXT </td>
+            <td><input type="text" name="text"></td>
+            
+        </tr>
+        
+        
+        <tr>
+            <td></td>
+            <td><input type="submit" name="t_simpan" value="submit"></td>
+        </tr>
+    </table>
+</form>
+</div>
+
+    </form>
+
+    <div class="footer">
+            <?php include "footer.php" ?>
+        </div>
