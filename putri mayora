@@ -1,0 +1,55 @@
+
+     <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+  
+ 
+<div class="utama">
+    	<div class="kepala">
+			<?php include "header.php" ?>
+		</div>
+    <!--ini untuk menu-->
+		<div class="menu-malasngoding">
+			<?php include "menu.php" ?>
+		</div>
+
+
+<?php
+
+include "koneksi.php";
+
+$sql = "SELECT * FROM tb_album";
+$stmt = $koneksi->prepare($sql);
+$stmt->execute();
+
+?>
+
+
+
+<table class="table-zebri-striping">
+	<h2></h2>
+<tr><th>ID</th>
+<th>NAMA</th>
+<th>TEXT</th>
+<th>PHOTO</th>
+<th>AKSI</th>
+		
+		
+	</tr>
+
+	<?php while ($row=$stmt->fetch()) { ?>
+		<tr>
+			<td> <?= $row['album_id']?></td>
+			<td> <?= $row['album_name']?></td>
+			<td> <?= $row['text']?></td>
+			<td> <?= $row['photo_id']?></td>
+			<td class="aksa">
+			<a href="album_edit.php?id=<?php echo $row['album_id']; ?>">Edit</a>
+			<a href="album_hapus.php?id=<?php echo $row['album_id']; ?>">Hapus</a></td>
+		</tr>
+	
+<?php } ?>
+</table>
+
+<div class="footer">
+			<?php include "footer.php" ?>
+		</div>
