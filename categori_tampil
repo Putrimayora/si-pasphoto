@@ -1,0 +1,54 @@
+
+     <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+  
+ 
+<div class="utama">
+    	<div class="kepala">
+			<?php include "header.php" ?>
+		</div>
+    <!--ini untuk menu-->
+		<div class="menu-malasngoding">
+			<?php include "menu.php" ?>
+		</div>
+
+
+<?php
+
+include "koneksi.php";
+
+$sql = "SELECT * FROM tb_category";
+$stmt = $koneksi->prepare($sql);
+$stmt->execute();
+
+?>
+
+
+
+<table class="table-zebri-striping">
+	<h2></h2>
+<tr><th>ID</th>
+<th>NAMA</th>
+<th>TEXT</th>
+<th>AKSI</th>
+		
+		
+	</tr>
+
+	<?php while ($row=$stmt->fetch()) { ?>
+		<tr>
+			<td> <?= $row['category_id']?></td>
+			<td> <?= $row['nama']?></td>
+			<td> <?= $row['text']?></td>
+			<td class="aksa">
+			<a href="category_edit.php?id=<?php echo $row['category_id']; ?>">Edit</a>
+			<a href="category_hapus.php?id=<?php echo $row['category_id']; ?>">Hapus</a></td>
+		</tr>
+	
+<?php } ?>
+</table>
+
+<div class="footer">
+			<?php include "footer.php" ?>
+		</div>
+
