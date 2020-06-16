@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="assets/css/style.css">
+
+		<div class="utama">
+    	<div class="kepala">
+			<?php include "header.php" ?>
+		</div>
+    <!--ini untuk menu-->
+		<div class="menu-malasngoding">
+			<?php include "menu.php" ?>
+		</div>
+<?php 
+include "koneksi.php";
+
+$id = $_GET['id'];
+
+$sql = "DELETE FROM tb_album WHERE album_id = :album_id";
+
+$stmt = $koneksi->prepare($sql);
+$stmt->bindParam(":album_id", $id);
+$stmt->execute();
+
+
+    header("location: album_tampil.php");
+    
+
+    
