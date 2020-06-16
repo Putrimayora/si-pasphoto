@@ -1,0 +1,58 @@
+
+     <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+  
+ 
+<div class="utama">
+    	<div class="kepala">
+			<?php include "header.php" ?>
+		</div>
+    <!--ini untuk menu-->
+		<div class="menu-malasngoding">
+			<?php include "menu.php" ?>
+		</div>
+
+
+<?php
+
+include "koneksi.php";
+
+$sql = "SELECT * FROM tb_post";
+$stmt = $koneksi->prepare($sql);
+$stmt->execute();
+
+?>
+
+
+
+<table class="table-zebri-striping">
+	<h2></h2>
+<tr>
+<th>ID POST</th>
+<th>ID CATEGORY</th>
+<th>DATE</th>
+<th>SLUG</th>
+<th>TITLE</th>
+<th>TEXT</th>
+<th>ID CAT</th>
+</tr>
+
+	<?php while ($row=$stmt->fetch()) { ?>
+		<tr>
+			<td> <?= $row['post_id']?></td>
+			<td> <?= $row['category_id']?></td>
+			<td> <?= $row['date']?></td>
+			<td> <?= $row['slug']?></td>
+			<td> <?= $row['title']?></td>
+			<td> <?= $row['text']?></td>
+			<td class="aksa">
+			<a href="post_edit.php?id=<?php echo $row['post_id']; ?>">Edit</a>
+			<a href="post_hapus.php?id=<?php echo $row['post_id']; ?>">Hapus</a></td>
+		</tr>
+	
+<?php } ?>
+</table>
+
+<div class="footer">
+			<?php include "footer.php" ?>
+		</div>
